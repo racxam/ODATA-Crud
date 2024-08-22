@@ -1,0 +1,49 @@
+<mvc:View
+    controllerName="com.crud.odatacrud.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+
+    <Table id="idProducts" items="{/results}">
+        <columns>
+            <Column>
+                <Text text="ID" />
+            </Column>
+            <Column>
+                <Text text="Name" />
+            </Column>
+            <Column>
+                <Text text="Price" />
+            </Column>
+            <Column>
+                <Text text="Rating" />
+            </Column>
+            <Column>
+                <Text text="" />
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text="{ID}" /> 
+                    <Text text="{Name}" /> 
+                    <Text text="{Price}" /> 
+                    <Input value="{Rating}" placeholder="Rating"  editable="false"/> 
+                    <HBox>
+                    <Button icon="sap-icon://edit" text="Edit"  press="onEdit"></Button>
+                    <Button icon="sap-icon://delete" text="Delete" class="sapUiSmallMarginBeginEnd"  type="Reject" press="onDelete"></Button>
+                    <Button icon="sap-icon://copy" text="Duplicate" press="onDuplicate"></Button>
+                    </HBox>
+
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+    </Page>
+</mvc:View>
+ 
