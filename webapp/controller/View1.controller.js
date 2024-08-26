@@ -115,7 +115,7 @@ sap.ui.define([
                   oInput.setEditable(false);
                     oModel.update("/Products("+oRowId+")", {Rating:oInputVal}, {
                         success: function (oData) {
-                            this.onReadAll();
+                            that.onReadAll();
 
                              
                         },
@@ -126,10 +126,44 @@ sap.ui.define([
                 }
                 
             },
-            onDelete: function () {
+            onDelete: function (oEvent) {
+                var that=this;
+                var oModel=this.getOwnerComponent().getModel();
+                oModel.setUseBatch(false);
+                var oId=oEvent.getSource().getBindingContext().getProperty("ID");
+                oModel.remove("/Products("+oId+")",{
+                    success:function(oData){
+                        that.onReadAll();
+
+                    },
+                    error:function(oError){
+                        console.log(oError);
+                    }
+                    
+                })
+
+
+
                 
             },
-            onDuplicate: function () {
+            onDuplicate: function (oEvent) {
+                var that= this;
+                var oModel= this.getOwnerComponent().getModel();
+                oModel.setUseBatch(false);
+                var oDuplicateData=oEvent.getSource().getBindingContext().getObject();
+                oDuplicateData.ID=100+oDuplicateData.ID;
+                oModel.create("/Products",oDuplicateData,
+                    {
+                        success:function(oData){
+                            that.onReadAll();
+
+                        },
+                        error:function(oError){
+                            console.log(oError);
+                        }
+                    }
+                )
+                 
                 
             }
 
